@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AlbumHero } from './components/AlbumHero'
 import { EnvelopeIntro } from './components/EnvelopeIntro'
 import { FinalSurprise } from './components/FinalSurprise'
@@ -20,21 +20,6 @@ import {
 
 export default function App() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false)
-  const [showContent, setShowContent] = useState(false)
-
-  useEffect(() => {
-    if (!isEnvelopeOpen) {
-      return
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      setShowContent(true)
-    }, 850)
-
-    return () => {
-      window.clearTimeout(timeoutId)
-    }
-  }, [isEnvelopeOpen])
 
   return (
     <div className="app">
@@ -52,22 +37,20 @@ export default function App() {
         to={introContent.to}
       />
 
-      {showContent ? (
-        <main className="page-shell">
-          <LoveLetter letter={letterContent} />
-          <AlbumHero album={albumContent} />
-          <PolaroidGallery photos={photoMemories} />
-          <PlaylistSection tracks={playlistTracks} />
-          <TimelineSection moments={timelineMoments} />
-          <ThingsILove items={thingsILoveList} />
-          <FinalSurprise content={finalSurpriseContent} />
+      <main className="page-shell">
+        <LoveLetter letter={letterContent} />
+        <AlbumHero album={albumContent} />
+        <PolaroidGallery photos={photoMemories} />
+        <PlaylistSection tracks={playlistTracks} />
+        <TimelineSection moments={timelineMoments} />
+        <ThingsILove items={thingsILoveList} />
+        <FinalSurprise content={finalSurpriseContent} />
 
-          <footer className="page-footer">
-            Feito com carinho, para a minha futura esposa.
-            Pra minha princesa Gigi.
-          </footer>
-        </main>
-      ) : null}
+        <footer className="page-footer">
+          Feito com carinho, para a minha futura esposa.
+          Pra minha princesa Gigi.
+        </footer>
+      </main>
     </div>
   )
 }
